@@ -1,7 +1,6 @@
-from . import create_equipment
-from . import create_monster
-# import monster_test
-import json, random, requests
+# from . import create_equipment
+# from . import create_monster
+import json, random, requests, create_monster, create_equipment
 
 def pathfinder(row,column):
 	global criticalPath
@@ -139,6 +138,7 @@ def createMaze(size,entranceRow,entranceColumn,level):
 
 	return json.dumps(maze)
 
+createMaze("3","1","1","1")
 # Export maze as JSON
 # with open('maze.json','w') as out:
 # 	json.dump(maze,out,indent=2)
