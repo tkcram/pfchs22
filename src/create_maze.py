@@ -1,5 +1,5 @@
-from . import monster_test
-from . import loot_test
+from . import create_equipment
+from . import create_monster
 # import monster_test
 import json, random, requests
 
@@ -92,18 +92,18 @@ def createMaze(size,entranceRow,entranceColumn,level):
 				'seen': False,
 				'doors': [0,0,0,0], #Top, Right, Bottom, Left
 			}
-			if  not (row == 0 and column == 0):
+			if  not (row == entranceRow and column == entranceColumn):
 				monsterRoll = random.randint(1,20)
 				if monsterRoll > 10:
 					monsterRandom = random.randint(0,monsterCount-1)
 					monsterName = monsterSearchData['results'][monsterRandom]['index']
 					if monsterName not in monsterList:
-						monsterList[monsterName] = monster_test.generator(monsterName)
+						monsterList[monsterName] = create_monster.generator(monsterName)
 					if monsterList[monsterName]['actions']:
 						maze[row][column]['monster'] = monsterList[monsterName]
 
 				lootRoll = random.randint(1,20)
-				lootBonus = 0
+				lootBonus = 1
 				if lootRoll == 20:
 					lootRoll = random.randint(1,20)
 					lootBonus = 1
@@ -116,16 +116,16 @@ def createMaze(size,entranceRow,entranceColumn,level):
 							if lootRoll == 20:
 								maze[row][column]['loot'] = 'God Mode'
 							else:
-								lootGet = loot_test.createLoot(lootRoll,lootBonus)
+								lootGet = create_equipment.createLoot(lootRoll,lootBonus)
 								maze[row][column]['loot'] = lootGet
 						else:
-							lootGet = loot_test.createLoot(lootRoll,lootBonus)
+							lootGet = create_equipment.createLoot(lootRoll,lootBonus)
 							maze[row][column]['loot'] = lootGet
 					else:
-						lootGet = loot_test.createLoot(lootRoll,lootBonus)
+						lootGet = create_equipment.createLoot(lootRoll,lootBonus)
 						maze[row][column]['loot'] = lootGet				
 				else:
-					lootGet = loot_test.createLoot(lootRoll,lootBonus)
+					lootGet = create_equipment.createLoot(lootRoll,lootBonus)
 					maze[row][column]['loot'] = lootGet
 
 	pathfinder(int(entranceRow),int(entranceColumn))

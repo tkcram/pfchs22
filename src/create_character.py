@@ -1,4 +1,4 @@
-from . import loot_test
+from . import create_equipment
 import json, random, re, requests, math
 
 #*****Initialise*****
@@ -69,7 +69,7 @@ def createCharacter(startLevel):
 		subclassSelect = random.randint(0, len(characterClassData['subclasses']) - 1)
 		charSubclass = characterClassData['subclasses'][subclassSelect]['index']
 		subclassUrl = characterClassData['subclasses'][subclassSelect]['url']
-		characterSubclassData = json.loads(requests.get(url + subclassUrl).text)
+		charSubclassData = json.loads(requests.get(url + subclassUrl).text)
 
 	#Character
 	charDetails['entity'] = 'hero'
@@ -264,14 +264,14 @@ def createCharacter(startLevel):
 		fullEquipmentList += itemList 
 
 	for equipment in fullEquipmentList:
-		loot_test.itemAdd(equipment,charInventory)
+		create_equipment.itemAdd(equipment,charInventory)
 
 	randomWeapon = random.choice(list(charWeapons))
-	weaponChoice = charWeapons[randomWeapon]
-	weaponChoice['equipped'] = True
+	# weaponChoice = charWeapons[randomWeapon]
+	# weaponChoice['equipped'] = True
 
-	for armor in charArmor:
-		charArmor[armor]['equipped'] = True
+	# for armor in charArmor:
+	# 	charArmor[armor]['equipped'] = True
 
 	#*****Combat*****
 	#Variables
