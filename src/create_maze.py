@@ -1,6 +1,6 @@
-# from . import create_equipment
-# from . import create_monster
-import json, random, requests, create_monster, create_equipment
+from . import create_equipment
+from . import create_monster
+import json, random, requests
 
 def pathfinder(row,column):
 	global criticalPath
